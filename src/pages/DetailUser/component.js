@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '../UsersList/actions';
 import PropTypes from 'prop-types';
 import { Tab } from '../../components';
+import Albums from './Albums';
 import Posts from './Posts';
 import { get } from 'lodash';
 
@@ -20,7 +21,7 @@ export const DetailUser = (props) => {
   },{
     key: 'album',
     title: 'Albums',
-    Element: null
+    Element: <Albums {...props}/>
   }];
   return (
     <>

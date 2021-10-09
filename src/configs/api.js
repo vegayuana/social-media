@@ -15,7 +15,7 @@ const api = {
   user: (id) => `${baseUrl}/users/${id}`,
   posts: (id) => `${baseUrl}/users/${id}/posts`,
   comments: (id) => `${baseUrl}/posts/${id}/comments`,
-  album: (id) => `${baseUrl}/users/${id}/albums`,
+  albums: (id) => `${baseUrl}/users/${id}/albums`,
   photos: (id) => `${baseUrl}/albums/${id}/photos`,
 };
 
