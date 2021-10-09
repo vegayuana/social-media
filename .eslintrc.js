@@ -21,8 +21,9 @@ module.exports = {
   ],
   "rules": {
     "jsx-quotes": 2,
-    "no-trailing-spaces": 2,
     "no-var": 2,
+    "no-console": 2,
+    "no-trailing-spaces": 2,
     "semi": [2, "always"],
     "react/prop-types": 2,
   }
