@@ -16,6 +16,7 @@ const App = () => {
           <Switch>
             <Layout>
               <Route exact path={ROUTES.MAIN()} component={pages.UsersList} />
+              <Route exact path={ROUTES.DETAIL_USER()} component={pages.DetailUser} />
             </Layout>
           </Switch>
         </Router>
