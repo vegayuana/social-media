@@ -15,12 +15,12 @@ const App = () => {
         <Router>
           <Switch>
             <Layout>
-              <Route exact path={ROUTES.DASHBOARD()} component={pages.Dashboard} />
+              <Route exact path={ROUTES.MAIN()} component={pages.UsersList} />
             </Layout>
           </Switch>
         </Router>
        </Provider>
     </ThemeProvider>
-  )
-}
+  );
+};
 export default App;

@@ -1,7 +1,7 @@
-import Dashboard from './Dashboard'
+import UsersList from './UsersList';
 
 const pages = {
-  Dashboard
+  UsersList,
 };
 
 export default pages;
