@@ -6,11 +6,16 @@ export const Layout = (props) => {
   const { classes } = props;
   return (
     <>
-      <Navbar/>
       <div className={classes.layout}>
-        <Container>
-          {props.children}
-        </Container>
+        <div className="sidebar">
+          Social Media
+        </div>
+        <div className="page">
+        <Navbar/>
+          <Container>
+            {props.children}
+          </Container>
+        </div>
       </div>
       <footer>
         <Container>
@@ -18,15 +23,17 @@ export const Layout = (props) => {
         </Container>
       </footer>
     </>
-  )
-}
+  );
+};
 
 Layout.defaultProps = {
   classes: {},
+  children: null
 };
 
 Layout.propTypes = {
   classes: PropTypes.object,
+  children: PropTypes.element,
 };
 
 export default Layout;

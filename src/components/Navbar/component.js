@@ -6,13 +6,12 @@ export const NavBar = (props) => {
   const { classes, menu } = props;
   return (
     <header className={classes.header}>
-     <Navbar bg="dark" expand="lg" sticky="top">
+     <Navbar expand="sm" sticky="top">
       <Container>
-        <Navbar.Brand>Social Media</Navbar.Brand>
         <Navbar.Collapse>
           <Nav>
-            {menu.map(item=><Link to={item.route}>item.label</Link>)}
-            <NavDropdown title="Menu">
+            {menu.map((item, i)=><Link key={i} to={item.route}>item.label</Link>)}
+            <NavDropdown title="Menu" alignRight>
               <NavDropdown.Item>Settings</NavDropdown.Item>
               <NavDropdown.Item>Logout</NavDropdown.Item>
             </NavDropdown>
@@ -21,8 +20,8 @@ export const NavBar = (props) => {
       </Container>
       </Navbar>
     </header>
-  )
-}
+  );
+};
 
 NavBar.defaultProps = {
   classes: {},

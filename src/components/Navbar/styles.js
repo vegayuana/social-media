@@ -1,13 +1,16 @@
 const styles = (theme) => ({
   header:{
-    '& .navbar .navbar-brand, ':{
-      color: 'white'
+    '& .navbar .container ':{
+      justifyContent: 'flex-end'
     },
     '& .navbar .nav-item.dropdown > a':{
-      color: 'white',
+      color:theme.colors.fontDark,
     },
     '& .navbar-collapse':{
       flexGrow: 'inherit'
+    },
+    '& .navbar-nav .dropdown-menu':{
+      left: '-100px'
     }
   }
 });
