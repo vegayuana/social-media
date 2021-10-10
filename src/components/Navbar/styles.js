@@ -1,7 +1,7 @@
 const styles = (theme) => ({
   header:{
     '& .navbar .container ':{
-      justifyContent: 'flex-end'
+      justifyContent: 'space-between'
     },
     '& .navbar .nav-item.dropdown > a':{
       color:theme.colors.fontDark,
@@ -10,7 +10,7 @@ const styles = (theme) => ({
       flexGrow: 'inherit'
     },
     '& .navbar-nav .dropdown-menu':{
-      left: '-100px'
+      left: '-25px'
     }
   }
 });
