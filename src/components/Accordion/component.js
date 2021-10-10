@@ -1,48 +1,133 @@
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
+
+import { FiEdit } from 'react-icons/fi';
+import { RiDeleteBin5Line } from 'react-icons/ri';
+import { FaChevronUp, FaChevronDown } from 'react-icons/fa';
+import { BiCommentAdd } from 'react-icons/bi';
 import Card from '../Card';
+import Form from '../Form';
+import { get, isEmpty } from 'lodash';
+import { Spinner } from 'react-bootstrap';
+import AccordionChild from './AccordionChild/component';
 
 const Accordion = (props) => {
-  const { classes, post, comments, handleExpand } = props;
+  const {
+    classes, post, fetchingComments,
+    handleExpand,
+    onEditPost: submitEditPost,
+    onDeletePost: handleDeletePost,
+    onAddComment: submitAddComment,
+  } = props;
+  const { user } = useSelector(state=>state.dummyAuth);
   const [show, setShow] = useState(false);
+  const [showEditPost, setShowEditPost] = useState(false);
+  const [showAddComment, setShowAddComment] = useState(false);
+
+  const handleEditPost = (postId, form) => {
+    handleToggleEditPost();
+    submitEditPost(postId, form);
+  };
+
+  const handleToggleEditPost = () => setShowEditPost(!showEditPost);
+
+  const handleToggleAddComment = () => {
+    !showAddComment && handleClickExpand(true);
+    setShowAddComment(!showAddComment);
+  };
+
+  const handleAddComment = (form) =>{
+    setShowAddComment(false);
+    submitAddComment(post.id, form);
+  };
 
   const renderMain = () => (
-    <div className={classes.main} onClick={handleClick}>
+    <div className={classes.main}>
       <Card>
-        <h3>{post.title}</h3>
-        <p>{post.body}</p>
-      </Card>
-    </div>
-  );
-
-  const renderComments = (comment) =>(
-    <div className={classes.comments}>
-      <Card>
-        <div className={'user'}>
-          <h4 className={'name'}>{comment.name}</h4>
-          <h4 className={'email'}>{comment.email}</h4>
+        <div className={classes.info}>
+          {showEditPost ?
+            <Form
+              formFields={[{
+                name: 'title',
+                placeholder: 'Title',
+                defaultValue: post.title,
+              },{
+                name: 'body',
+                placeholder: 'Write something on body post',
+                defaultValue: post.body,
+                type: 'textarea'
+              }]}
+              buttonLabel={'Edit'}
+              handleSubmit={handleEditPost.bind(this, post.id)}
+              handleCancel={handleToggleEditPost}
+            /> :
+            <>
+              <div>
+                <h3>{post.title}</h3>
+                <p>{post.body}</p>
+                <div className={'tools'}>
+                  <BiCommentAdd onClick={handleToggleAddComment} className={'add'}/>
+                  <FiEdit onClick={handleToggleEditPost} className={'edit'}/>
+                  <RiDeleteBin5Line onClick={handleDeletePost.bind(this, post.id)}  className={'delete'}/>
+                </div>
+              </div>
+            </>
+          }
+          <div className={'actions'}>
+            <div onClick={handleClickExpand} className={'expand'}> {show ? <>Hide Comments <FaChevronUp /></> : <>See Comments <FaChevronDown/></>} </div>
+          </div>
         </div>
-        <p>{comment.body}</p>
       </Card>
     </div>
   );
 
-  const handleClick = () => {
+  const renderFormNewComment = () =>(
+    <div className={classes.form}>
+      <Card>
+        <Form
+          title={'New Comment'}
+          formFields={[{
+            name: 'user',
+            placeholder: '',
+            defaultValue: `${get(user, 'name')} - ${get(user, 'email')}`,
+            disabled: true
+          },{
+            name: 'body',
+            placeholder: 'Comment something',
+            defaultValue: '',
+            type: 'textarea'
+          }]}
+          buttonLabel={'Post'}
+          handleSubmit={handleAddComment}
+          handleCancel={handleToggleAddComment}
+        />
+      </Card>
+    </div>
+  );
+
+  const handleClickExpand = (value) => {
     !show && handleExpand({ postId: post.id });
-    setShow(!show);
+    setShow(value===true ? value : !show);
   };
 
   return (
     <>
       {renderMain()}
+      {showAddComment && renderFormNewComment()}
       {show && (
-        <>
-          {comments.map((item, i)=>(
-            <div key={i}>
-              {renderComments(item)}
-            </div>
-          ))}
-        </>
+        <div className={classes.commentWrapper}>
+          {fetchingComments ?
+            <div  className="text-center">
+              <Spinner animation="border" variant="primary"/>
+            </div> :
+            <>
+              {!isEmpty(get(post, 'comments')) && get(post, 'comments').map((item, i)=>
+                <AccordionChild comment={item} key={i} {...props}/>
+              )}
+            </>
+          }
+        </div>
       )}
     </>
   );
@@ -50,18 +135,28 @@ const Accordion = (props) => {
 
 Accordion.defaultProps = {
   classes: {},
-  posts: [],
-  comments: [],
+  post: null,
   children: null,
-  handleExpand: () => null
+  handleExpand: () => null,
+  onEditPost: ()=>null,
+  onDeletePost: ()=>null,
+  onAddComment: ()=>null,
+  onEditComment: ()=>null,
+  onDeleteComment: ()=>null,
+  fetchingComments: false
 };
 
 Accordion.propTypes = {
   classes: PropTypes.object,
   post: PropTypes.array,
-  comments: PropTypes.array,
   children: PropTypes.element,
   handleExpand: PropTypes.func,
+  fetchingComments: PropTypes.bool,
+  onEditPost: PropTypes.func,
+  onDeletePost: PropTypes.func,
+  onAddComment: PropTypes.func,
+  onEditComment: PropTypes.func,
+  onDeleteComment: PropTypes.func,
 };
 
 export default Accordion;
