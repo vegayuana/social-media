@@ -9,7 +9,7 @@ export function getAllPosts(payload) {
       dispatch(actions.getPostRequest());
       const { data } = await axios(API.axiosOptions({
         method: 'GET',
-        url: API.posts(id),
+        url: API.postsByUser(id),
       }));
 
       dispatch(actions.getPostsSuccess(data));
@@ -26,7 +26,7 @@ export function getPostById(payload) {
       dispatch(actions.getPostRequest());
       const { data } = await axios(API.axiosOptions({
         method: 'GET',
-        url: API.posts(id),
+        url: API.postById(id),
       }));
 
       dispatch(actions.getPostSuccess(data));
@@ -43,12 +43,108 @@ export function getComments(payload) {
       dispatch(actions.getCommentsRequest());
       const { data } = await axios(API.axiosOptions({
         method: 'GET',
-        url: API.comments(id),
+        url: API.commentsByPost(id),
       }));
 
       dispatch(actions.getCommentsSuccess(data));
     } catch ({ response }) {
       dispatch(actions.getCommentsError(response));
+    }
+  };
+}
+
+export function createPost(payload) {
+  return async (dispatch) => {
+    try {
+      dispatch(actions.createPostRequest());
+      const { data } = await axios(API.axiosOptions({
+        method: 'POST',
+        url: API.posts,
+        data: payload
+      }));
+      dispatch(actions.createPostSuccess(data));
+    } catch ({ response }) {
+      dispatch(actions.createPostError());
+    }
+  };
+}
+
+export function updatePost(payload) {
+  return async (dispatch) => {
+    try {
+      dispatch(actions.updatePostRequest());
+      const { data } = await axios(API.axiosOptions({
+        method: 'PUT',
+        url: API.postById(payload.id),
+        data: payload
+      }));
+      dispatch(actions.updatePostSuccess(data));
+    } catch ({ response }) {
+      dispatch(actions.updatePostError());
+    }
+  };
+}
+
+export function deletePost(payload) {
+  return async (dispatch) => {
+    try {
+      dispatch(actions.deletePostRequest());
+      await axios(API.axiosOptions({
+        method: 'DELETE',
+        url: API.postById(payload),
+      }));
+
+      dispatch(actions.deletePostSuccess(payload));
+    } catch ({ response }) {
+      dispatch(actions.deletePostError());
+    }
+  };
+}
+
+export function createComment(payload) {
+  return async (dispatch) => {
+    try {
+      dispatch(actions.createCommentRequest());
+      const { data } = await axios(API.axiosOptions({
+        method: 'POST',
+        url: API.comments,
+        data: payload
+      }));
+      dispatch(actions.createCommentSuccess(data));
+    } catch ({ response }) {
+      dispatch(actions.createCommentError());
+    }
+  };
+}
+
+export function updateComment(payload) {
+  return async (dispatch) => {
+    try {
+      dispatch(actions.updateCommentRequest());
+      const { data } = await axios(API.axiosOptions({
+        method: 'PUT',
+        url: API.commentById(payload.id),
+        data: payload
+      }));
+      dispatch(actions.updateCommentSuccess(data));
+    } catch ({ response }) {
+      dispatch(actions.updateCommentError());
+    }
+  };
+}
+
+export function deleteComment(payload) {
+  return async (dispatch) => {
+    try {
+      dispatch(actions.deleteCommentRequest());
+      await axios(API.axiosOptions({
+        method: 'DELETE',
+        url: API.commentById(payload),
+      }));
+
+      dispatch(actions.deleteCommentSuccess(payload));
+    } catch ({ response }) {
+      dispatch(actions.deleteCommentError());
     }
   };
 }

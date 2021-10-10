@@ -29,7 +29,10 @@ export const DetailUser = (props) => {
         <div className={classes.userInfo}>
           <h1>{get(user, 'name')}</h1>
           <p>{get(user, 'username')}</p>
-          <p>{get(user, 'email')}</p>
+          <p>{get(user, 'email')} - {get(user, 'website')}</p>
+          <p>Work at : {get(user, 'company.name')}</p>
+          <i>{get(user, 'company.catchPhrase')}</i>
+          <p>{get(user, 'company.bs')}</p>
         </div>
         <Tab
           tabMenu={menu}

@@ -28,18 +28,18 @@ export default function reducer(state = initialState, action) {
         error: payload,
         fetchingAlbums: false,
       };
-    case ACTIONS.GET_PHOTO_REQUEST:
+    case ACTIONS.GET_PHOTOS_REQUEST:
       return {
         ...state,
         fetchingPhotos: true
       };
-    case ACTIONS.GET_PHOTO_SUCCESS:
+    case ACTIONS.GET_PHOTOS_SUCCESS:
       return {
         ...state,
         photos: payload,
         fetchingPhotos: false,
       };
-    case ACTIONS.GET_PHOTO_ERROR:
+    case ACTIONS.GET_PHOTOS_ERROR:
       return {
         ...state,
         error: payload,
