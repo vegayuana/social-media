@@ -59,6 +59,10 @@ const styles = (theme) => ({
     '& p':{
       margin: 0
     },
+    '& pre':{
+      fontFamily: 'inherit',
+      fontSize: '0.9em'
+    },
     '& a':{
       textDecoration: 'none',
       color: 'inherit'

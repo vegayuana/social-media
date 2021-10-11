@@ -66,7 +66,7 @@ const Accordion = (props) => {
             <>
               <div>
                 <h3>{get(post, 'title')}</h3>
-                <p>{get(post, 'body')}</p>
+                <pre>{get(post, 'body')}</pre>
                 {/* Condition for showing tools only on post made by logged in user */}
                 {/* {get(user, 'id')===get(post, 'userId') && ( */}
                   <div className={'tools'}>

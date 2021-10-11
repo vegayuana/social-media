@@ -55,7 +55,7 @@ const AccordionChild = (props) => {
           <div>
               <h4 className={'name'}>{comment.name}</h4>
               <h4 className={'email'}>{comment.email}</h4>
-              <p>{comment.body}</p>
+              <pre>{comment.body}</pre>
           </div>
           <div className={'actions'}>
             <div className={'tools'}>
