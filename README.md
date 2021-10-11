@@ -1,7 +1,8 @@
-This project uses dummy user to demonstrate user login
-Assuming the logged in user is Leanne
-Leanne can update/delete posts/comments from anyone regardless who posted or commented it
-Because the logged in user is Leanne, when writing a new comment, the user column will immediately be filled with Leanne's name and email
+This project uses dummy user to demonstrate user login.
+Assuming the logged in user is Leanne,
+Leanne can update/delete posts/comments from anyone regardless who posted or commented it.
+Because the logged in user is Leanne, when writing a new comment, the user column will immediately be filled with Leanne's name and email.
+Logout menu is intentionally not working. The menu is only to show there is a logged in user
 
 # Getting Started with Create React App
 
