@@ -1,10 +1,11 @@
+import { isEmpty } from 'lodash';
 import PropTypes from 'prop-types';
 const CardImage = (props) => {
   const { classes, images, handleClick } = props;
 
   return (
     <div className={classes.wrapper}>
-      {images.map((item,i)=>(
+      {!isEmpty(images) && images.map((item,i)=>(
         <div key={i} className={classes.imageContainer} onClick={()=>handleClick(item)}>
           <img
             src={item.thumbnailUrl}

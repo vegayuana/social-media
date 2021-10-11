@@ -180,7 +180,7 @@ export default function reducer(state = initialState, action) {
           ...post,
           comments: post.comments ?
             post.comments.map(item=>{
-              if(item.id===payload.id){
+              if(item.id===get(payload, 'id')){
                 return {
                   ...item,
                   ...payload,

@@ -51,11 +51,11 @@ const Accordion = (props) => {
               formFields={[{
                 name: 'title',
                 placeholder: 'Title',
-                defaultValue: post.title,
+                defaultValue: get(post, 'title'),
               },{
                 name: 'body',
                 placeholder: 'Write something on body post',
-                defaultValue: post.body,
+                defaultValue: get(post, 'body'),
                 type: 'textarea'
               }]}
               buttonLabel={'Edit'}
@@ -64,12 +64,12 @@ const Accordion = (props) => {
             /> :
             <>
               <div>
-                <h3>{post.title}</h3>
-                <p>{post.body}</p>
+                <h3>{get(post, 'title')}</h3>
+                <p>{get(post, 'body')}</p>
                 <div className={'tools'}>
                   <BiCommentAdd onClick={handleToggleAddComment} className={'add'}/>
                   <FiEdit onClick={handleToggleEditPost} className={'edit'}/>
-                  <RiDeleteBin5Line onClick={handleDeletePost.bind(this, post.id)}  className={'delete'}/>
+                  <RiDeleteBin5Line onClick={handleDeletePost.bind(this, get(post, 'id'))}  className={'delete'}/>
                 </div>
               </div>
             </>
@@ -107,7 +107,7 @@ const Accordion = (props) => {
   );
 
   const handleClickExpand = (value) => {
-    !show && handleExpand({ postId: post.id });
+    !show && handleExpand({ postId: get(post, 'id') });
     setShow(value===true ? value : !show);
   };
 
@@ -136,7 +136,6 @@ const Accordion = (props) => {
 Accordion.defaultProps = {
   classes: {},
   post: null,
-  children: null,
   handleExpand: () => null,
   onEditPost: ()=>null,
   onDeletePost: ()=>null,
@@ -149,7 +148,6 @@ Accordion.defaultProps = {
 Accordion.propTypes = {
   classes: PropTypes.object,
   post: PropTypes.array,
-  children: PropTypes.element,
   handleExpand: PropTypes.func,
   fetchingComments: PropTypes.bool,
   onEditPost: PropTypes.func,

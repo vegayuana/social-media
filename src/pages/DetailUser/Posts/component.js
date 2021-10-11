@@ -7,7 +7,7 @@ import { Accordion, Button, Form } from '../../../components';
 import { BsPlusLg } from 'react-icons/bs';
 import { Spinner } from 'react-bootstrap';
 import Card from '../../../components/Card/component';
-import { get } from 'lodash';
+import { get, isEmpty } from 'lodash';
 
 export const Posts = (props) => {
   const { classes, match: { params: { id } } } = props;
@@ -90,7 +90,7 @@ export const Posts = (props) => {
         <div  className="text-center">
           <Spinner animation="border" variant="primary"/>
         </div>
-        : posts.map((post, i)=>(
+        : !isEmpty(posts) && posts.map((post, i)=>(
           <Accordion
             key={i}
             post={post}

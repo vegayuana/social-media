@@ -4,7 +4,7 @@ import * as actions from './actions';
 import PropTypes from 'prop-types';
 import { Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { get } from 'lodash';
+import { get, isEmpty } from 'lodash';
 import { ROUTES } from '../../configs';
 
 export const UsersList = (props) => {
@@ -32,7 +32,7 @@ export const UsersList = (props) => {
           </tr>
         </thead>
         <tbody>
-          {users.map((item, i)=>(
+          {!isEmpty(users) && users.map((item, i)=>(
             <tr key={i}>
               <td>{i+1}</td>
               <td> <Link to={ROUTES.DETAIL_USER(item.id)}>{get(item, 'name')}</Link></td>

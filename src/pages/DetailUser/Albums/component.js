@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as actions from './actions';
 import { Link } from 'react-router-dom';
 import { ROUTES } from '../../../configs';
+import { isEmpty } from 'lodash';
 
 export const Albums = (props) => {
   const { classes, match: { params: { id } } } = props;
@@ -17,7 +18,7 @@ export const Albums = (props) => {
   return (
     <div>
       <h1>Albums</h1>
-      {albums.map((item, i)=>(
+      {!isEmpty(albums) && albums.map((item, i)=>(
         <Link to={ROUTES.PHOTOS(id, item.id)} key={i}>
           <div key={i} className={classes.list}>{item.title}</div>
         </Link>

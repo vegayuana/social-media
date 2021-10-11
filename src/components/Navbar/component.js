@@ -14,7 +14,6 @@ export const NavBar = (props) => {
         <Navbar.Collapse>
           <Nav>
             <NavDropdown title={get(user, 'name')} alignRight>
-              <NavDropdown.Item>Settings</NavDropdown.Item>
               <NavDropdown.Item>Logout</NavDropdown.Item>
             </NavDropdown>
           </Nav>
