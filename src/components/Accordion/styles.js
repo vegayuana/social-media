@@ -7,7 +7,10 @@ const styles = (theme) => ({
   },
   info:{
     display: 'grid',
-    gridTemplateColumns: 'auto 180px',
+    gridTemplateColumns: 'auto 25px',
+    ['@media (min-width:768px)']: {
+      gridTemplateColumns: 'auto 180px',
+    },
     '& .actions':{
       display: 'flex',
       flexDirection: 'column',
@@ -15,6 +18,14 @@ const styles = (theme) => ({
     },
     '& .expand':{
       cursor: 'pointer',
+      display: 'flex',
+      '& span':{
+        display: 'none',
+        ['@media (min-width:768px)']: {
+          display: 'block',
+          marginRight: 8,
+        },
+      },
       '&  svg':{
         fontSize: 22,
         color: theme.colors.dark,
@@ -38,17 +49,50 @@ const styles = (theme) => ({
       }
     }
   },
+  childInfo:{
+    display: 'grid',
+    gridTemplateColumns: 'auto 60px',
+    ['@media (min-width:1300px)']: {
+      gridTemplateColumns: 'auto 100px',
+    },
+    '& .actions':{
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'end',
+    },
+    '& .tools':{
+      fontSize: 25,
+      '& svg':{
+        cursor: 'pointer'
+      },
+      '& svg.edit':{
+        color: theme.colors.green,
+        marginRight: 5
+      },
+      '& svg.delete':{
+        color: theme.colors.red,
+      }
+    }
+  },
   form:{
     marginLeft: 50,
   },
   commentWrapper:{
     border: `1px solid ${theme.colors.grey}`,
     borderRadius: 5,
-    marginLeft: 50,
+    marginLeft: 20,
     marginBottom: 30,
-    padding: '20px 50px',
+    padding: 15,
+    ['@media (min-width:768px)']: {
+      marginLeft: 50,
+      padding: '20px 30px 20px 50px',
+    },
+    ['@media (min-width:1300px)']: {
+      padding: '20px 30px 20px 50px',
+    },
   },
   comments:{
+    paddingBottom: 20,
     '&:not(:last-child) ':{
       borderBottom: `1px solid ${theme.colors.grey}`,
       marginBottom: 20,

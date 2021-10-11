@@ -80,6 +80,7 @@ export const Posts = (props) => {
               defaultValue: '',
               type: 'textarea'
             }]}
+            buttonStyle={'end'}
             buttonLabel={'Send'}
             handleSubmit={handleAddPost}
           />

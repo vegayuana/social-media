@@ -5,6 +5,7 @@ import * as actions from './actions';
 import { Link } from 'react-router-dom';
 import { ROUTES } from '../../../configs';
 import { isEmpty } from 'lodash';
+import { FaChevronRight } from 'react-icons/fa';
 
 export const Albums = (props) => {
   const { classes, match: { params: { id } } } = props;
@@ -20,7 +21,10 @@ export const Albums = (props) => {
       <h1>Albums</h1>
       {!isEmpty(albums) && albums.map((item, i)=>(
         <Link to={ROUTES.PHOTOS(id, item.id)} key={i}>
-          <div key={i} className={classes.list}>{item.title}</div>
+          <div className={'d-flex align-items-center'}>
+            <FaChevronRight/>
+            <div key={i} className={classes.list}>{item.title}</div>
+          </div>
         </Link>
       ))}
     </div>

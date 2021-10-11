@@ -40,7 +40,7 @@ export const Layout = (props) => {
 
 Layout.defaultProps = {
   classes: {},
-  children: null
+  children: <></>
 };
 
 Layout.propTypes = {

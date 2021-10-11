@@ -8,7 +8,7 @@ export const NavBar = (props) => {
   const { user } = useSelector(state=>state.dummyAuth);
   return (
     <header className={classes.header}>
-     <Navbar expand="sm" sticky="top">
+     <Navbar>
       <Container>
         <Navbar.Brand>Social Media</Navbar.Brand>
         <Navbar.Collapse>

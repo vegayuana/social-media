@@ -1,13 +1,13 @@
 const styles = () => ({
-  header:{
-    '& .navbar .navbar-brand, ':{
-      color: 'white'
+  wrapper:{
+    '& .form-group':{
+      marginBottom: 20,
     },
-    '& .navbar .nav-item.dropdown > a':{
-      color: 'white',
+    '& button':{
+      marginRight: 10
     },
-    '& .navbar-collapse':{
-      flexGrow: 'inherit'
+    '& button:last-child':{
+      margin:0
     }
   }
 });

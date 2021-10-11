@@ -4,21 +4,29 @@ const styles = (theme) => ({
     display: 'flex',
     backgroundColor: theme.colors.dark,
     '& .sidebar':{
-      width: 150,
+      minWidth: 80,
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
       marginTop: 200,
       '& p':{
         color: 'white'
+      },
+      ['@media (min-width:768px)']: {
+        minWidth: 100,
+      },
+      ['@media (min-width:1300px)']: {
+        minWidth: 150,
       }
     },
     '& .page':{
       borderTopLeftRadius: 50,
       borderBottomLeftRadius: 50,
-      padding: '20px 20px 40px 30px',
       width: '100%',
-      backgroundColor: 'white'
+      backgroundColor: 'white',
+      ['@media (min-width:768px)']: {
+        padding: '20px 20px 40px 30px',
+      },
     },
     '& .list-menu':{
       backgroundColor: 'white',
@@ -32,6 +40,28 @@ const styles = (theme) => ({
       alignItems: 'center',
       justifyContent: 'center',
       cursor: 'pointer'
+    },
+    '& h1':{
+      fontSize: '2em'
+    },
+    '& h2':{
+      fontSize: '1.5em'
+    },
+    '& h3':{
+      fontSize: '1.25em'
+    },
+    '& h4':{
+      fontSize: '1em'
+    },
+    '& h5':{
+      fontSize: '8em'
+    },
+    '& p':{
+      margin: 0
+    },
+    '& a':{
+      textDecoration: 'none',
+      color: 'inherit'
     }
   },
 });

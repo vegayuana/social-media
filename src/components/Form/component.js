@@ -5,7 +5,7 @@ import { get } from 'lodash';
 
 export const CustomForm = (props) => {
   const {
-    classes, formFields, title, buttonLabel,
+    classes, buttonStyle, formFields, title, buttonLabel,
     handleSubmit: handleSubmitProps,
     handleCancel
   } = props;
@@ -45,7 +45,7 @@ export const CustomForm = (props) => {
           </Form.Group>
         );
       })}
-      <div>
+      <div className={buttonStyle==='end' && 'd-flex justify-content-end'}>
         <Button onClick={handleSubmit}>{buttonLabel}</Button>
         {handleCancel && <Button onClick={handleCancel}>Cancel</Button>}
       </div>
@@ -60,6 +60,7 @@ CustomForm.defaultProps = {
   buttonLabel: '',
   handleSubmit: ()=>null,
   handleCancel: null,
+  buttonStyle: ''
 };
 
 CustomForm.propTypes = {
@@ -67,6 +68,7 @@ CustomForm.propTypes = {
   formFields: PropTypes.array,
   title: PropTypes.string,
   buttonLabel: PropTypes.string,
+  buttonStyle: PropTypes.string,
   handleSubmit: PropTypes.func,
   handleCancel: PropTypes.func,
 };

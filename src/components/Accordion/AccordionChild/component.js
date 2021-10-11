@@ -5,6 +5,7 @@ import { FiEdit } from 'react-icons/fi';
 import { RiDeleteBin5Line } from 'react-icons/ri';
 import Form from '../../Form';
 import { get } from 'lodash';
+import CustomTooltip from '../../Tooltip/component';
 
 const AccordionChild = (props) => {
   const {
@@ -40,29 +41,35 @@ const AccordionChild = (props) => {
         type: 'textarea'
       }]}
       buttonLabel={'Edit'}
+      buttonStyle={'end'}
       handleSubmit={handleEditComment}
+      handleCancel={handleToggleEditComment}
     />
   );
 
   return (
     <div className={classes.comments}>
-      <div className={classes.info}>
-        <div>
-          {showEditComment ? renderFormEditComment(comment) :
-            <>
+      {showEditComment ? renderFormEditComment(comment) :
+        <>
+        <div className={classes.childInfo}>
+          <div>
               <h4 className={'name'}>{comment.name}</h4>
               <h4 className={'email'}>{comment.email}</h4>
               <p>{comment.body}</p>
-            </>
-          }
-        </div>
-        <div className={'actions'}>
-          <div className={'tools'}>
-            <FiEdit onClick={handleToggleEditComment} className={'edit'}/>
-            <RiDeleteBin5Line onClick={handleDeleteComment.bind(this, comment.id)} className={'delete'}/>
+          </div>
+          <div className={'actions'}>
+            <div className={'tools'}>
+              <CustomTooltip text={'Edit Comment'}>
+                <FiEdit onClick={handleToggleEditComment} className={'edit'}/>
+              </CustomTooltip>
+              <CustomTooltip text={'Delete Comment'}>
+                <RiDeleteBin5Line onClick={handleDeleteComment.bind(this, comment.id)} className={'delete'}/>
+              </CustomTooltip>
+            </div>
           </div>
         </div>
-      </div>
+        </>
+      }
     </div>
   );
 };

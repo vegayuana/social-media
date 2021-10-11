@@ -11,6 +11,7 @@ import Form from '../Form';
 import { get, isEmpty } from 'lodash';
 import { Spinner } from 'react-bootstrap';
 import AccordionChild from './AccordionChild/component';
+import CustomTooltip from '../Tooltip/component';
 
 const Accordion = (props) => {
   const {
@@ -66,16 +67,25 @@ const Accordion = (props) => {
               <div>
                 <h3>{get(post, 'title')}</h3>
                 <p>{get(post, 'body')}</p>
-                <div className={'tools'}>
-                  <BiCommentAdd onClick={handleToggleAddComment} className={'add'}/>
-                  <FiEdit onClick={handleToggleEditPost} className={'edit'}/>
-                  <RiDeleteBin5Line onClick={handleDeletePost.bind(this, get(post, 'id'))}  className={'delete'}/>
-                </div>
+                {/* Condition for showing tools only on post made by logged in user */}
+                {/* {get(user, 'id')===get(post, 'userId') && ( */}
+                  <div className={'tools'}>
+                    <CustomTooltip text={'Add Comment'}>
+                      <BiCommentAdd onClick={handleToggleAddComment} className={'add'}/>
+                    </CustomTooltip>
+                    <CustomTooltip text={'Edit Post'}>
+                      <FiEdit onClick={handleToggleEditPost} className={'edit'}/>
+                    </CustomTooltip>
+                    <CustomTooltip text={'Delete Post'}>
+                      <RiDeleteBin5Line onClick={handleDeletePost.bind(this, get(post, 'id'))}  className={'delete'}/>
+                    </CustomTooltip>
+                  </div>
+                {/* )} */}
               </div>
             </>
           }
           <div className={'actions'}>
-            <div onClick={handleClickExpand} className={'expand'}> {show ? <>Hide Comments <FaChevronUp /></> : <>See Comments <FaChevronDown/></>} </div>
+            <div onClick={handleClickExpand} className={'expand'}> {show ? <><span>Hide Comments</span> <FaChevronUp /></> : <><span>See Comments</span> <FaChevronDown/></>} </div>
           </div>
         </div>
       </Card>
@@ -98,6 +108,7 @@ const Accordion = (props) => {
             defaultValue: '',
             type: 'textarea'
           }]}
+          buttonStyle={'end'}
           buttonLabel={'Post'}
           handleSubmit={handleAddComment}
           handleCancel={handleToggleAddComment}
@@ -117,7 +128,7 @@ const Accordion = (props) => {
       {showAddComment && renderFormNewComment()}
       {show && (
         <div className={classes.commentWrapper}>
-          {fetchingComments ?
+          {fetchingComments && isEmpty(get(post, 'comments'))?
             <div  className="text-center">
               <Spinner animation="border" variant="primary"/>
             </div> :

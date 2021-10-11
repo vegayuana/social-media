@@ -1,7 +1,16 @@
 const styles = (theme) => ({
   header:{
     '& .navbar .container ':{
-      justifyContent: 'space-between'
+      justifyContent: 'flex-end',
+      ['@media (min-width:768px)']: {
+        justifyContent: 'space-between',
+      }
+    },
+    '& .navbar-brand':{
+      display: 'none',
+      ['@media (min-width:768px)']: {
+        display: 'block',
+      }
     },
     '& .navbar .nav-item.dropdown > a':{
       color:theme.colors.fontDark,
