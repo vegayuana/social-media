@@ -32,9 +32,11 @@ export const Photos = (props) => {
 
   return (
     <>
-      <h1>Album: {get(albumInfo, 'title')}</h1>
-      <div className={classes.wrapper}>
-        <CardImage images={photos} handleClick={handleClick}/>
+      <div className={classes.page}>
+        <h1>Album: {get(albumInfo, 'title')}</h1>
+        <div className={classes.wrapper}>
+          <CardImage images={photos} handleClick={handleClick}/>
+        </div>
       </div>
       <Modal
         show={modal}
